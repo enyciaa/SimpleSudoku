@@ -4,6 +4,8 @@ import android.app.Application
 import com.example.myapplication.App
 import com.example.myapplication.domain.Announcer
 import com.example.myapplication.domain.DispatcherProvider
+import com.example.myapplication.domain.SudokuGenerator
+import com.example.myapplication.platform.SudokuGeneratorImpl
 import com.example.myapplication.ui.AnnouncerImpl
 import dagger.Binds
 import dagger.BindsInstance
@@ -36,4 +38,7 @@ interface ApplicationScopedModule {
 
     @Binds
     fun dispatcherProvider(dispatcherProvider: DispatcherProvider): DispatcherProvider
+
+    @Binds
+    fun sudokuGenerator(sudokuGeneratorImpl: SudokuGeneratorImpl): SudokuGenerator
 }

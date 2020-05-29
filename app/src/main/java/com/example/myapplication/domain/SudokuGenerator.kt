@@ -1,10 +1,6 @@
 package com.example.myapplication.domain
 
-import javax.inject.Inject
+interface SudokuGenerator {
 
-class SudokuGenerator @Inject constructor() {
-
-    fun createGame(): SudokuGame {
-        return SudokuGame("Game")
-    }
+    fun createGame(): SudokuGame
 }

@@ -19,3 +19,17 @@ fun Intent.startActivity(originActivity: Activity) {
 fun CoroutineScope.isCancelled() : Boolean {
     return this.coroutineContext[Job]?.isCancelled != false
 }
+
+/**
+ * Maps a 2D array
+ */
+inline fun <reified T> Array<Array<T>>.map(function: (T) -> T): Array<Array<T?>> {
+    val data = Array(this.size){arrayOfNulls<T>(this[0].size)}
+    for (i in 0 until this.size) {
+        for (j in 0 until this[0].size) {
+            data[i][j] = function(this[i][j])
+        }
+    }
+    return data
+}
+
