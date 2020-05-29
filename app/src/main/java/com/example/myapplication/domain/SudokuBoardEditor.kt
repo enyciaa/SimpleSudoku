@@ -3,6 +3,10 @@ package com.example.myapplication.domain
 import java.lang.RuntimeException
 import javax.inject.Inject
 
+/**
+ * Abstracts board editing outside the view model
+ * so it's easier to test in the future
+ */
 class SudokuBoardEditor @Inject constructor() {
 
     private var sudokuBoard: SudokuBoard? = null

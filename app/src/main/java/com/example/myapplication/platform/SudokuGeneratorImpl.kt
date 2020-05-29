@@ -11,7 +11,7 @@ class SudokuGeneratorImpl @Inject constructor() : SudokuGenerator {
 
     val generator: Generator by lazy { Generator() }
 
-    override fun createGame(): SudokuBoard {
+    override suspend fun createGame(): SudokuBoard {
         return generator.generate(55).toDomain()
     }
 

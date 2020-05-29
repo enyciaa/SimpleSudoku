@@ -2,7 +2,6 @@ package com.example.myapplication.ui
 
 import com.example.myapplication.di.ActivityScope
 import com.example.myapplication.domain.Announcer
-import com.example.myapplication.getRootViewGroup
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 

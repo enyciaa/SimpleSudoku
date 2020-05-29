@@ -13,7 +13,7 @@ class CurrentGameRepository @Inject constructor(
         // TODO: Persist between sessions
     }
 
-    fun fetchGame(): SudokuBoard {
+    suspend fun fetchGame(): SudokuBoard {
         return sudokuBoard ?: sudokuGenerator.createGame()
     }
 }

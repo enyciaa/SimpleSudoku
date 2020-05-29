@@ -5,6 +5,8 @@ import com.example.myapplication.di.ActivityScope
 import com.example.myapplication.domain.*
 import com.example.myapplication.ui.base.LifecycleReceiver
 import com.example.myapplication.ui.base.MotherViewModel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @ActivityScope
@@ -20,9 +22,11 @@ class GameViewModel @Inject constructor(
     override var lastViewState = ViewState()
 
     init {
-        val sudokuBoard = currentGameRepository.fetchGame()
-        emitViewState(lastViewState.copy(sudokuBoard = sudokuBoard))
-        sudokuBoardEditor.setSudokuBoard(sudokuBoard)
+        coroutineScope.launch {
+            val sudokuBoard = withContext(dispatcherProvider.background) { currentGameRepository.fetchGame() }
+            emitViewState(lastViewState.copy(sudokuBoard = sudokuBoard))
+            sudokuBoardEditor.setSudokuBoard(sudokuBoard)
+        }
     }
 
     override fun onAction(action: UiAction) {
@@ -33,10 +37,12 @@ class GameViewModel @Inject constructor(
                         resourceProvider.getString(R.string.lose_game_warning),
                         resourceProvider.getString(R.string.lose_game_warning_confirmation)
                 ) {
-                    val sudokuBoard = sudokuGenerator.createGame()
-                    emitViewState(lastViewState.copy(sudokuBoard = sudokuBoard))
-                    sudokuBoardEditor.setSudokuBoard(sudokuBoard)
-                    currentGameRepository.saveGame(sudokuBoard)
+                    coroutineScope.launch {
+                        val sudokuBoard = withContext(dispatcherProvider.background) { sudokuGenerator.createGame() }
+                        emitViewState(lastViewState.copy(sudokuBoard = sudokuBoard))
+                        sudokuBoardEditor.setSudokuBoard(sudokuBoard)
+                        currentGameRepository.saveGame(sudokuBoard)
+                    }
                 }
             }
             is UiAction.NumberSelected -> {

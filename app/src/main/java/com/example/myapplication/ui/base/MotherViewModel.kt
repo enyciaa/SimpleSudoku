@@ -15,7 +15,7 @@ abstract class MotherViewModel<T : MotherViewModel.ViewState, S : MotherViewMode
     interface UiAction
 
     protected abstract var lastViewState: T
-    protected lateinit var coroutineScope: CoroutineScope
+    protected var coroutineScope: CoroutineScope = CoroutineScope(dispatcherProvider.main + SupervisorJob())
     private var viewStatePublisher: ConflatedBroadcastChannel<T> = ConflatedBroadcastChannel()
 
     override fun onLifecycle(lifecycle: LifecycleReceiver.Lifecycle) {
@@ -27,7 +27,7 @@ abstract class MotherViewModel<T : MotherViewModel.ViewState, S : MotherViewMode
 
     @CallSuper
     protected open fun onAttach() {
-        if (! this::coroutineScope.isInitialized || coroutineScope.isCancelled()) {
+        if (coroutineScope.isCancelled()) {
             coroutineScope = CoroutineScope(dispatcherProvider.main + SupervisorJob())
         }
         emitViewState(lastViewState)
