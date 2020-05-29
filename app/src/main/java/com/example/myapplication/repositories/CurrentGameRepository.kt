@@ -1,5 +1,7 @@
-package com.example.myapplication.domain
+package com.example.myapplication.repositories
 
+import com.example.myapplication.domain.SudokuBoard
+import com.example.myapplication.domain.SudokuGenerator
 import javax.inject.Inject
 
 class CurrentGameRepository @Inject constructor(

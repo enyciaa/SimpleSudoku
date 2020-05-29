@@ -1,10 +1,9 @@
-package com.example.myapplication.ui
+package com.example.myapplication.viewmodels
 
 import com.example.myapplication.R
 import com.example.myapplication.di.ActivityScope
 import com.example.myapplication.domain.*
-import com.example.myapplication.ui.base.LifecycleReceiver
-import com.example.myapplication.ui.base.MotherViewModel
+import com.example.myapplication.repositories.CurrentGameRepository
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -32,7 +31,7 @@ class GameViewModel @Inject constructor(
     override fun onAction(action: UiAction) {
         super.onAction(action)
         when (action) {
-            UiAction.NewGameClicked -> {
+            UiAction.NewGameClicked    -> {
                 announcer.announce(
                         resourceProvider.getString(R.string.lose_game_warning),
                         resourceProvider.getString(R.string.lose_game_warning_confirmation)

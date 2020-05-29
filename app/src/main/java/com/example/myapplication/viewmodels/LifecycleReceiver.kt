@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.base
+package com.example.myapplication.viewmodels
 
 interface LifecycleReceiver {
 

@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.base
+package com.example.myapplication.viewmodels
 
 import com.example.myapplication.isCancelled
 import dagger.android.AndroidInjector

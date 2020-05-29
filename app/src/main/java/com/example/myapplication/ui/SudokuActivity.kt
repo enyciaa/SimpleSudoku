@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.R
-import com.example.myapplication.domain.DispatcherProvider
-import com.example.myapplication.ui.base.LifecycleReceiver
-import com.example.myapplication.ui.base.MotherUiOrchestrator
+import com.example.myapplication.viewmodels.LifecycleReceiver
+import com.example.myapplication.viewmodels.MotherUiOrchestrator
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
 import kotlinx.android.synthetic.main.sudoku_activity.*
