@@ -1,6 +1,6 @@
 package com.example.myapplication.platform
 
-import com.example.myapplication.domain.SudokuGame
+import com.example.myapplication.domain.SudokuBoard
 import com.example.myapplication.domain.SudokuGenerator
 import javax.inject.Inject
 
@@ -11,11 +11,11 @@ class SudokuGeneratorImpl @Inject constructor() : SudokuGenerator {
 
     val generator: Generator by lazy { Generator() }
 
-    override fun createGame(): SudokuGame {
-        return generator.generate(10).toDomain()
+    override fun createGame(): SudokuBoard {
+        return generator.generate(55).toDomain()
     }
 
-    private fun SudokuGame.toDomain(): SudokuGame {
+    private fun SudokuBoard.toDomain(): SudokuBoard {
         //Convert to kotlin impl of soduku game
         return this
     }

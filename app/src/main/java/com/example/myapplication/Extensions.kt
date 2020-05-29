@@ -21,15 +21,18 @@ fun CoroutineScope.isCancelled() : Boolean {
 }
 
 /**
- * Maps a 2D array
+ * Loop over a 2D array
  */
-inline fun <reified T> Array<Array<T>>.map(function: (T) -> T): Array<Array<T?>> {
-    val data = Array(this.size){arrayOfNulls<T>(this[0].size)}
+inline fun <reified T> Array<Array<T>>.forEachIndexed2D(function: (rowNumber: Int, columnNumber: Int, T) -> Unit): Unit {
+    var rowNumber = 0
+    var columnNumber = 0
     for (i in 0 until this.size) {
         for (j in 0 until this[0].size) {
-            data[i][j] = function(this[i][j])
+            function(rowNumber, columnNumber, this[i][j])
+            columnNumber++
         }
+        columnNumber = 0
+        rowNumber++
     }
-    return data
 }
 

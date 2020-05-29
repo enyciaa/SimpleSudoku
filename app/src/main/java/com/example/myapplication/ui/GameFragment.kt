@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import com.example.myapplication.R
 import com.example.myapplication.ui.base.LifecycleReceiver
 import com.example.myapplication.ui.base.MotherFragment
+import kotlinx.android.synthetic.main.fragment_game.*
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 class GameFragment : MotherFragment() {
@@ -31,11 +33,15 @@ class GameFragment : MotherFragment() {
             savedInstanceState: Bundle?
     ) {
         super.onViewCreated(view, savedInstanceState)
+        newGameButton.setOnClickListener { gameViewModel.onAction(GameViewModel.UiAction.NewGameClicked) }
     }
 
     override fun onStart() {
         super.onStart()
         gameViewModel.viewStateStream()
+                .onEach { viewState ->
+                    sudokuBoard.setBoard(viewState.sudokuBoard)
+                }
                 .launchIn(coroutineScope)
     }
 }

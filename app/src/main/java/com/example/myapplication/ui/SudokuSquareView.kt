@@ -39,4 +39,8 @@ class SudokuSquareView @JvmOverloads constructor(
             }
         }
     }
+
+    fun setSquare(square: Array<Array<Int>>) {
+        sudokuSquare.map {  }
+    }
 }

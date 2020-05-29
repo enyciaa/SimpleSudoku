@@ -1,11 +1,11 @@
 package com.example.myapplication.platform;
 
-import com.example.myapplication.domain.SudokuGame;
+import com.example.myapplication.domain.SudokuBoard;
 
 import java.util.Random;
 
 /**
- * A Generator to generate random Sudoku {@link SudokuGame} instances.
+ * A Generator to generate random Sudoku {@link SudokuBoard} instances.
  *
  * Taken from:
  * https://github.com/a11n/sudoku
@@ -21,27 +21,27 @@ public class Generator {
   }
 
   /**
-   * Generates a random {@link SudokuGame} instance with the given number of empty {@link SudokuGame.Cell}s.
+   * Generates a random {@link SudokuBoard} instance with the given number of empty {@link SudokuBoard.Cell}s.
    * <br><br>
-   * Note: The complexity for a human player increases with an higher amount of empty {@link SudokuGame.Cell}s.
-   * @param numberOfEmptyCells the number of empty {@link SudokuGame.Cell}s
-   * @return a randomly filled Sudoku {@link SudokuGame} with the given number of empty {@link SudokuGame.Cell}s
+   * Note: The complexity for a human player increases with an higher amount of empty {@link SudokuBoard.Cell}s.
+   * @param numberOfEmptyCells the number of empty {@link SudokuBoard.Cell}s
+   * @return a randomly filled Sudoku {@link SudokuBoard} with the given number of empty {@link SudokuBoard.Cell}s
    */
-  public SudokuGame generate(int numberOfEmptyCells) {
-    SudokuGame sudokuGame = generate();
+  public SudokuBoard generate(int numberOfEmptyCells) {
+    SudokuBoard sudokuBoard = generate();
 
-    eraseCells(sudokuGame, numberOfEmptyCells);
+    eraseCells(sudokuBoard, numberOfEmptyCells);
 
-    return sudokuGame;
+    return sudokuBoard;
   }
 
-  private void eraseCells(SudokuGame sudokuGame, int numberOfEmptyCells) {
+  private void eraseCells(SudokuBoard sudokuBoard, int numberOfEmptyCells) {
     Random random = new Random();
     for (int i = 0; i < numberOfEmptyCells; i++) {
       int randomRow = random.nextInt(9);
       int randomColumn = random.nextInt(9);
 
-      SudokuGame.Cell cell = sudokuGame.getCell(randomRow, randomColumn);
+      SudokuBoard.Cell cell = sudokuBoard.getCell(randomRow, randomColumn);
       if (!cell.isEmpty()) {
         cell.setValue(0);
       } else {
@@ -50,11 +50,11 @@ public class Generator {
     }
   }
 
-  private SudokuGame generate() {
-    SudokuGame sudokuGame = SudokuGame.emptyGrid();
+  private SudokuBoard generate() {
+    SudokuBoard sudokuBoard = SudokuBoard.emptyGrid();
 
-    solver.solve(sudokuGame);
+    solver.solve(sudokuBoard);
 
-    return sudokuGame;
+    return sudokuBoard;
   }
 }

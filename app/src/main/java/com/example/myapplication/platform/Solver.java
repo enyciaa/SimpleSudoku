@@ -1,12 +1,12 @@
 package com.example.myapplication.platform;
 
-import com.example.myapplication.domain.SudokuGame;
+import com.example.myapplication.domain.SudokuBoard;
 
 import java.util.Optional;
 import java.util.Random;
 
 /**
- * A Solver is capable of solving a given Sudoku {@link SudokuGame}.
+ * A Solver is capable of solving a given Sudoku {@link SudokuBoard}.
  *
  * Taken from:
  * https://github.com/a11n/sudoku
@@ -24,28 +24,28 @@ public class Solver {
   }
 
   /**
-   * Solves a given {@link SudokuGame} using backtracking.
+   * Solves a given {@link SudokuBoard} using backtracking.
    *
-   * @param sudokuGame the {@link SudokuGame} to solve
-   * @throws IllegalStateException in case the provided {@link SudokuGame} is invalid.
+   * @param sudokuBoard the {@link SudokuBoard} to solve
+   * @throws IllegalStateException in case the provided {@link SudokuBoard} is invalid.
    */
-  public void solve(SudokuGame sudokuGame) {
-    boolean solvable = solve(sudokuGame, sudokuGame.getFirstEmptyCell());
+  public void solve(SudokuBoard sudokuBoard) {
+    boolean solvable = solve(sudokuBoard, sudokuBoard.getFirstEmptyCell());
 
     if (!solvable) {
       throw new IllegalStateException("The provided grid is not solvable.");
     }
   }
 
-  private boolean solve(SudokuGame sudokuGame, Optional<SudokuGame.Cell> cell) {
+  private boolean solve(SudokuBoard sudokuBoard, Optional<SudokuBoard.Cell> cell) {
     if (!cell.isPresent()) {
       return true;
     }
 
     for (int value : values) {
-      if (sudokuGame.isValidValueForCell(cell.get(), value)) {
+      if (sudokuBoard.isValidValueForCell(cell.get(), value)) {
         cell.get().setValue(value);
-        if (solve(sudokuGame, sudokuGame.getNextEmptyCellOf(cell.get()))) return true;
+        if (solve(sudokuBoard, sudokuBoard.getNextEmptyCellOf(cell.get()))) return true;
         cell.get().setValue(EMPTY);
       }
     }

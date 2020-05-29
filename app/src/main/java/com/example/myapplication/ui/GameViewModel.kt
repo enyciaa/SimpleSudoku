@@ -1,10 +1,7 @@
 package com.example.myapplication.ui
 
 import com.example.myapplication.di.ActivityScope
-import com.example.myapplication.domain.Announcer
-import com.example.myapplication.domain.CurrentGameRepository
-import com.example.myapplication.domain.DispatcherProvider
-import com.example.myapplication.domain.SudokuGenerator
+import com.example.myapplication.domain.*
 import com.example.myapplication.ui.base.MotherViewModel
 import javax.inject.Inject
 
@@ -18,11 +15,18 @@ class GameViewModel @Inject constructor(
 
     override var lastViewState = ViewState()
 
+    override fun onAction(action: UiAction) {
+        super.onAction(action)
+        when (action) {
+            UiAction.NewGameClicked -> emitViewState(lastViewState.copy(sudokuBoard = sudokuGenerator.createGame()))
+        }
+    }
+
     data class ViewState(
-            val loadingIsVisible: Boolean = false
+            val sudokuBoard: SudokuBoard = SudokuBoard.emptyGrid()
     ) : MotherViewModel.ViewState
 
     sealed class UiAction : MotherViewModel.UiAction {
-        class CurrencySelected(val currency: String) : UiAction()
+        object NewGameClicked : UiAction()
     }
 }

@@ -2,5 +2,5 @@ package com.example.myapplication.domain
 
 interface SudokuGenerator {
 
-    fun createGame(): SudokuGame
+    fun createGame(): SudokuBoard
 }

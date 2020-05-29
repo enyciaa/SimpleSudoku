@@ -6,13 +6,13 @@ class CurrentGameRepository @Inject constructor(
         private val sudokuGenerator: SudokuGenerator
 ) {
 
-    private var sudokuGame: SudokuGame? = null
+    private var sudokuBoard: SudokuBoard? = null
 
-    fun saveGame(sudokuGame: SudokuGame) {
-        this.sudokuGame = sudokuGame
+    fun saveGame(sudokuBoard: SudokuBoard) {
+        this.sudokuBoard = sudokuBoard
     }
 
-    fun fetchGame(): SudokuGame {
-        return sudokuGame ?: sudokuGenerator.createGame()
+    fun fetchGame(): SudokuBoard {
+        return sudokuBoard ?: sudokuGenerator.createGame()
     }
 }

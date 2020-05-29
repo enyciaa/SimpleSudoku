@@ -12,11 +12,11 @@ import java.util.Optional;
  * Taken from:
  * https://github.com/a11n/sudoku
  */
-public class SudokuGame {
+public class SudokuBoard {
 
   private final Cell[][] grid;
 
-  private SudokuGame(Cell[][] grid) {
+  private SudokuBoard(Cell[][] grid) {
     this.grid = grid;
   }
 
@@ -26,7 +26,7 @@ public class SudokuGame {
    * @param grid a two-dimensional int-array representation of a Grid
    * @return a Grid instance corresponding to the provided two-dimensional int-array
    */
-  public static SudokuGame of(int[][] grid) {
+  public static SudokuBoard of(int[][] grid) {
     verifyGrid(grid);
 
     Cell[][] cells = new Cell[9][9];
@@ -84,7 +84,7 @@ public class SudokuGame {
       }
     }
 
-    return new SudokuGame(cells);
+    return new SudokuBoard(cells);
   }
 
   /**
@@ -92,9 +92,9 @@ public class SudokuGame {
    *
    * @return an empty Grid
    */
-  public static SudokuGame emptyGrid() {
+  public static SudokuBoard emptyGrid() {
     int[][] emptyGrid = new int[9][9];
-    return SudokuGame.of(emptyGrid);
+    return SudokuBoard.of(emptyGrid);
   }
 
   private static void verifyGrid(int[][] grid) {
@@ -229,7 +229,7 @@ public class SudokuGame {
   }
 
   /**
-   * This class represents a Cell within a Sudoku {@link SudokuGame}. <br><br> It features a couple of
+   * This class represents a Cell within a Sudoku {@link SudokuBoard}. <br><br> It features a couple of
    * convenient methods.
    */
   public static class Cell {
@@ -348,15 +348,15 @@ public class SudokuGame {
   }
 
   private static class StringConverter {
-    public static String toString(SudokuGame sudokuGame) {
+    public static String toString(SudokuBoard sudokuBoard) {
       StringBuilder builder = new StringBuilder();
-      int size = sudokuGame.getSize();
+      int size = sudokuBoard.getSize();
 
       printTopBorder(builder);
       for (int row = 0; row < size; row++) {
         printRowBorder(builder);
         for (int column = 0; column < size; column++) {
-          printValue(builder, sudokuGame, row, column);
+          printValue(builder, sudokuBoard, row, column);
           printRightColumnBorder(builder, column + 1, size);
         }
         printRowBorder(builder);
@@ -376,8 +376,8 @@ public class SudokuGame {
       builder.append("║");
     }
 
-    private static void printValue(StringBuilder builder, SudokuGame sudokuGame, int row, int column) {
-      int value = sudokuGame.getCell(row, column).getValue();
+    private static void printValue(StringBuilder builder, SudokuBoard sudokuBoard, int row, int column) {
+      int value = sudokuBoard.getCell(row, column).getValue();
       String output = value != 0 ? String.valueOf(value) : " ";
       builder.append(" " + output + " ");
     }
