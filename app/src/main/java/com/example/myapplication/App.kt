@@ -7,7 +7,7 @@ import dagger.android.DaggerApplication
 class App : DaggerApplication() {
 
     override fun applicationInjector(): AndroidInjector<App> {
-        return DaggerSudokuComponent.builder()
+        return DaggerSudokuComponent.factory()
                 .build(this)
     }
 }

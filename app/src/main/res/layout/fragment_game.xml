@@ -8,60 +8,36 @@
     tools:context="com.example.myapplication.ui.GameFragment"
     >
     
-    <TextView
-        android:id="@+id/textView"
+    <View
+        android:id="@+id/poshBackground"
         android:layout_width="0dp"
-        android:layout_height="17dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/a_main_progress"
-        app:layout_constraintVertical_bias="0.0"
-        android:gravity="center"
-        android:text="Hello World!"
-        />
-    
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/a_main_recycler"
-        android:layout_width="0dp"
-        android:layout_height="495dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/a_main_btn"
-        />
-    
-    <Button
-        android:id="@+id/a_main_btn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="-1dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:text="@string/load_data"
-        />
-    
-    <ProgressBar
-        android:id="@+id/a_main_progress"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:indeterminate="true"
-        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintVertical_bias="0"
+        android:background="@color/colorPrimaryDark"
+        />
+    
+    <com.example.myapplication.ui.NumberPickerView
+        android:id="@+id/numberPicker"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/newGameButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+    
+    <Button
+        android:id="@+id/newGameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/new_game"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

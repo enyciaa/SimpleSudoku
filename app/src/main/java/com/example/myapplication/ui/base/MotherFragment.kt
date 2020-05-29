@@ -15,8 +15,7 @@ abstract class MotherFragment : Fragment(),
                                 MotherUiOrchestrator {
 
     @Inject override lateinit var androidInjector: DispatchingAndroidInjector<Any?>
-    @Inject lateinit var dispatcherProvider: DispatcherProvider
-    override var coroutineScope: CoroutineScope = CoroutineScope(dispatcherProvider.main + SupervisorJob())
+    override var coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)

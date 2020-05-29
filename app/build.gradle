@@ -29,6 +29,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    viewBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -46,6 +49,8 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:2.26"
     kapt "com.google.dagger:dagger-compiler:2.26"
     kapt "com.google.dagger:dagger-android-processor:2.26"
+
+    implementation 'com.google.android:flexbox:2.0.1'
 
     testImplementation 'junit:junit:4.12'
 }

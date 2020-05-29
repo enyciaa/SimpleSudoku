@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.myapplication.App
 import com.example.myapplication.domain.Announcer
 import com.example.myapplication.domain.DispatcherProvider
+import com.example.myapplication.domain.DispatcherProviderImpl
 import com.example.myapplication.domain.SudokuGenerator
 import com.example.myapplication.platform.SudokuGeneratorImpl
 import com.example.myapplication.ui.AnnouncerImpl
@@ -20,13 +21,13 @@ import dagger.android.support.AndroidSupportInjectionModule
         modules = [
             AndroidInjectionModule::class,
             AndroidSupportInjectionModule::class,
-            SingleActivityModule::class,
-            ApplicationScopedModule::class
+            ApplicationScopedModule::class,
+            SingleActivityModule::class
         ]
 )
 interface SudokuComponent : AndroidInjector<App> {
 
-    @Component.Builder
+    @Component.Factory
     interface Builder {
 
         fun build(@BindsInstance application: Application): SudokuComponent
@@ -37,7 +38,7 @@ interface SudokuComponent : AndroidInjector<App> {
 interface ApplicationScopedModule {
 
     @Binds
-    fun dispatcherProvider(dispatcherProvider: DispatcherProvider): DispatcherProvider
+    fun dispatcherProvider(dispatcherProviderImpl: DispatcherProviderImpl): DispatcherProvider
 
     @Binds
     fun sudokuGenerator(sudokuGeneratorImpl: SudokuGeneratorImpl): SudokuGenerator
