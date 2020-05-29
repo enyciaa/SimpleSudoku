@@ -1,5 +1,6 @@
 package com.example.myapplication.ui
 
+import com.example.myapplication.R
 import com.example.myapplication.di.ActivityScope
 import com.example.myapplication.domain.*
 import com.example.myapplication.ui.base.LifecycleReceiver
@@ -12,6 +13,7 @@ class GameViewModel @Inject constructor(
         private val currentGameRepository: CurrentGameRepository,
         private val sudokuBoardEditor: SudokuBoardEditor,
         private val announcer: Announcer,
+        private val resourceProvider: ResourceProvider,
         private val dispatcherProvider: DispatcherProvider
 ) : MotherViewModel<GameViewModel.ViewState, GameViewModel.UiAction>(dispatcherProvider) {
 
@@ -27,10 +29,15 @@ class GameViewModel @Inject constructor(
         super.onAction(action)
         when (action) {
             UiAction.NewGameClicked -> {
-                val sudokuBoard = sudokuGenerator.createGame()
-                emitViewState(lastViewState.copy(sudokuBoard = sudokuBoard))
-                sudokuBoardEditor.setSudokuBoard(sudokuBoard)
-                currentGameRepository.saveGame(sudokuBoard)
+                announcer.announce(
+                        resourceProvider.getString(R.string.lose_game_warning),
+                        resourceProvider.getString(R.string.lose_game_warning_confirmation)
+                ) {
+                    val sudokuBoard = sudokuGenerator.createGame()
+                    emitViewState(lastViewState.copy(sudokuBoard = sudokuBoard))
+                    sudokuBoardEditor.setSudokuBoard(sudokuBoard)
+                    currentGameRepository.saveGame(sudokuBoard)
+                }
             }
             is UiAction.NumberSelected -> {
                 val newBoard = sudokuBoardEditor.updateNumber(action.number, action.cell)
@@ -54,6 +61,9 @@ class GameViewModel @Inject constructor(
 
     sealed class UiAction : MotherViewModel.UiAction {
         object NewGameClicked : UiAction()
-        class NumberSelected(val number: Int, val cell: Pair<Int, Int>) : UiAction()
+        class NumberSelected(
+                val number: Int,
+                val cell: Pair<Int, Int>
+        ) : UiAction()
     }
 }

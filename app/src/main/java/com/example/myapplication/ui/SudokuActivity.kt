@@ -1,6 +1,7 @@
 package com.example.myapplication.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.R
 import com.example.myapplication.domain.DispatcherProvider
@@ -8,6 +9,7 @@ import com.example.myapplication.ui.base.LifecycleReceiver
 import com.example.myapplication.ui.base.MotherUiOrchestrator
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
+import kotlinx.android.synthetic.main.sudoku_activity.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -18,6 +20,7 @@ class SudokuActivity : AppCompatActivity(),
 
     @Inject override lateinit var androidInjector: DispatchingAndroidInjector<Any?>
     override var coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
+    val rootView: View by lazy { rootLayoutInSystemWindows }
 
     override fun lifecycleReceivers(): List<LifecycleReceiver> {
         return emptyList()

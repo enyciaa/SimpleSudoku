@@ -10,6 +10,7 @@ class CurrentGameRepository @Inject constructor(
 
     fun saveGame(sudokuBoard: SudokuBoard) {
         this.sudokuBoard = sudokuBoard
+        // TODO: Persist between sessions
     }
 
     fun fetchGame(): SudokuBoard {
