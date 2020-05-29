@@ -21,6 +21,8 @@ class SudokuBoardView @JvmOverloads constructor(
 ) {
 
     private lateinit var sudokuBoardViews: Array<Array<FrameLayout>>
+    private var selectedCellRowNumber: Int = -1
+    private var selectedCellColumnNumber: Int = -1
 
     init {
         inflate(getContext(), R.layout.sudoku_board_view, this)
@@ -28,9 +30,13 @@ class SudokuBoardView @JvmOverloads constructor(
     }
 
     private fun inflateBoard() {
-        sudokuBoardViews = Array(9) {
-            Array(9) {
+        sudokuBoardViews = Array(9) { rowNumber ->
+            Array(9) { columnNumber ->
                 val view = inflate(context, R.layout.sudoku_cell, null) as FrameLayout
+                view.setOnClickListener {
+                    selectedCellRowNumber = rowNumber
+                    selectedCellColumnNumber = columnNumber
+                }
                 sudokuBoardLayout.addView(view)
                 view
             }
@@ -42,6 +48,13 @@ class SudokuBoardView @JvmOverloads constructor(
             val textView: TextView = frameLayout.findViewById(R.id.sudokuNumber)
             textView.text = sudokuBoard.getCell(rowNumber, columnNumber).value.ifZeroReturnNull().toStringOrEmpty()
         }
+    }
+
+    fun getSelectedCell(): Pair<Int, Int>? {
+        if (selectedCellRowNumber < 0 || selectedCellColumnNumber < 0) {
+            return null
+        }
+        return Pair(selectedCellRowNumber, selectedCellColumnNumber)
     }
 
     private fun Int.ifZeroReturnNull(): Int? {

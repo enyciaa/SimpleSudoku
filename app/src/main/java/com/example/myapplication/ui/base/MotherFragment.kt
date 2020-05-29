@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import com.example.myapplication.domain.DispatcherProvider
+import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.coroutines.CoroutineScope

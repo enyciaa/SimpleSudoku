@@ -34,6 +34,10 @@ class GameFragment : MotherFragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         newGameButton.setOnClickListener { gameViewModel.onAction(GameViewModel.UiAction.NewGameClicked) }
+        numberPicker.setNumberClickedCallback { number ->
+            val selectedCell = sudokuBoard.getSelectedCell() ?: return@setNumberClickedCallback
+            gameViewModel.onAction(GameViewModel.UiAction.NumberSelected(number, selectedCell))
+        }
     }
 
     override fun onStart() {
