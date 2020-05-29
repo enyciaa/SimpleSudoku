@@ -17,6 +17,12 @@ class GameViewModel @Inject constructor(
 
     override var lastViewState = ViewState()
 
+    init {
+        val sudokuBoard = currentGameRepository.fetchGame()
+        emitViewState(lastViewState.copy(sudokuBoard = sudokuBoard))
+        sudokuBoardEditor.setSudokuBoard(sudokuBoard)
+    }
+
     override fun onAction(action: UiAction) {
         super.onAction(action)
         when (action) {
